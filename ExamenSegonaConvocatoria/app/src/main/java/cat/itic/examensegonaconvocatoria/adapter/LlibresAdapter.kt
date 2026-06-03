@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import cat.itic.examensegonaconvocatoria.R
 import cat.itic.examensegonaconvocatoria.models.Llibre
 
-class LlibresAdapter : RecyclerView.Adapter<LlibreViewHolder>() {
+class LlibresAdapter() : RecyclerView.Adapter<LlibreViewHolder>() {
 
     private var llibres = listOf<Llibre>()
 

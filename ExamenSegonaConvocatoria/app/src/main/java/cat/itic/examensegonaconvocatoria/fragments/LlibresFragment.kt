@@ -1,4 +1,5 @@
 package cat.itic.examensegonaconvocatoria.fragments
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.widget.Toolbar
@@ -7,11 +8,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.chip.ChipGroup
 import android.os.Bundle
 import android.view.View
+import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
 import cat.itic.examensegonaconvocatoria.LlistaLlibres
 import cat.itic.examensegonaconvocatoria.R
 import cat.itic.examensegonaconvocatoria.adapter.LlibresAdapter
 import cat.itic.examensegonaconvocatoria.models.Genere
 import com.google.android.material.chip.Chip
+import androidx.core.graphics.toColorInt
 
 class LlibresFragment : Fragment() {
 
@@ -21,10 +25,7 @@ class LlibresFragment : Fragment() {
     private lateinit var adapter: LlibresAdapter
     private var genereSeleccionat: Genere? = null
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_llibres, container, false)
     }
@@ -39,10 +40,17 @@ class LlibresFragment : Fragment() {
         setupRecyclerView()
         setupChips()
         setupToolbarBehavior()
+        //canviarColorsText(view)
     }
 
     private fun setupRecyclerView() {
-        //TODO: fer el setup del recycler view
+        val manager = LinearLayoutManager(requireContext())
+
+        adapter = LlibresAdapter()
+        adapter.setLlibres(LlistaLlibres.llibres)
+
+        recyclerView.layoutManager = manager
+        recyclerView.adapter = adapter
     }
 
     private fun setupChips() {
@@ -97,5 +105,17 @@ class LlibresFragment : Fragment() {
             }
             adapter.setLlibres(llibresFiltrats)
         }
+    }
+
+    private fun canviarColorsText(view : View){
+        val edText = view.findViewById<TextView>(R.id.tvEstat)
+
+        if(edText.text == "Per Llegir") {
+            edText.setTextColor("#FF9800".toColorInt())
+        }
+        else if (edText.text == "Llegint"){
+            edText.setTextColor("#2196F3".toColorInt())
+        }
+        else edText.setTextColor("#4CAF50".toColorInt())
     }
 }

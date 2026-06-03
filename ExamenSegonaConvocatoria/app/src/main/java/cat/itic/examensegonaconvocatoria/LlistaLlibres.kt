@@ -6,7 +6,7 @@ import cat.itic.examensegonaconvocatoria.models.Llibre
 
 class LlistaLlibres {
 
-    object LlibresRepository {
+    companion object LlibresRepository {
 
         val llibres = listOf(
             Llibre(1, "Els Pilars de la Terra", "Ken Follett", Genere.Novella, 1989, Estat.Llegit),
